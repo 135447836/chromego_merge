@@ -312,6 +312,15 @@ else:
 # 更新自动选择和节点选择的proxies的name部分
 update_proxy_groups(config_data, merged_proxies)
 
+# 添加类型转换代码
+for proxy in proxies:
+    for key in ['port', 'server_port', 'listen_port', 'port_range']:
+        if key in proxy and isinstance(proxy.get(key), str):
+            try:
+                proxy[key] = int(proxy[key])
+            except:
+                pass
+
 # 将更新后的数据写入到一个YAML文件中，并指定编码格式为UTF-8
 with open("./sub/merged_proxies_new.yaml", "w", encoding="utf-8") as file:
     yaml.dump(config_data, file, sort_keys=False, allow_unicode=True)
