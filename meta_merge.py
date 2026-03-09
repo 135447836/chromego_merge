@@ -313,7 +313,7 @@ else:
 update_proxy_groups(config_data, merged_proxies)
 
 # 添加类型转换代码
-for proxy in proxies:
+for proxy in merged_proxies:
     for key in ['port', 'server_port', 'listen_port', 'port_range']:
         if key in proxy and isinstance(proxy.get(key), str):
             try:
